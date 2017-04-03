@@ -1,0 +1,10 @@
+name: mdconvert
+channels:
+  - conda-forge
+dependencies:
+  - jupyterlab
+  - ruamel_yaml
+  - setuptools
+  - pytest
+  - yapf
+  - flake8

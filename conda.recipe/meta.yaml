@@ -1,0 +1,40 @@
+{% set name = "mdformat" %}
+{% set version = "0.1.0" %}
+# sha256 is the prefered checksum -- you can get it for a file with:
+#  `openssl sha256 <file name>`.
+# You may need the openssl package, available on conda-forge
+#  `conda install openssl -c conda-forge``
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: ..
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record record.txt
+
+requirements:
+  build:
+    - python
+    - setuptools
+  run:
+    - python
+    - nbformat
+
+test:
+  # Some package might need a `test/commands` key to check CLI.
+  # List all the packages/modules that `run_test.py` imports.
+  imports:
+    - mdformat
+  commands:
+    - jupyter mdformat --help
+
+about:
+  home: http://github.com/tonyfast/mdformat
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: Drive the configuration of nbconvert with the metadata from an ipynb.
