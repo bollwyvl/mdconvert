@@ -1,13 +1,6 @@
-{% set name = "mdformat" %}
-{% set version = "0.1.0" %}
-# sha256 is the prefered checksum -- you can get it for a file with:
-#  `openssl sha256 <file name>`.
-# You may need the openssl package, available on conda-forge
-#  `conda install openssl -c conda-forge``
-
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: mdconvert
+  version: "0.1.0"
 
 source:
   git_url: ..
@@ -21,20 +14,26 @@ requirements:
     - python
     - setuptools
   run:
-    - python
     - nbformat
+    - python
+    - ruamel_yaml
 
 test:
-  # Some package might need a `test/commands` key to check CLI.
-  # List all the packages/modules that `run_test.py` imports.
+  source_files:
+    - setup.cfg
+  requires:
+    - pytest
+    - flake8
   imports:
-    - mdformat
+    - mdconvert
   commands:
-    - jupyter mdformat --help
+    - flake8 mdconvert
+    - pytest -p mdconvert.tests
+    - jupyter mdconvert --help
 
 about:
-  home: http://github.com/tonyfast/mdformat
+  home: http://github.com/tonyfast/mdconvert
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE
-  summary: Drive the configuration of nbconvert with the metadata from an ipynb.
+  summary: Configure and convert notebooks using metadata
