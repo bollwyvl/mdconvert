@@ -20,6 +20,7 @@ requirements:
 
 test:
   source_files:
+    - tests
     - setup.cfg
   requires:
     - pytest
@@ -28,7 +29,7 @@ test:
     - mdconvert
   commands:
     - flake8 mdconvert
-    - pytest -p mdconvert.tests
+    - pytest
     - jupyter mdconvert --help
 
 about:
